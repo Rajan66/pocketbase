@@ -3,9 +3,9 @@ nixPkgs = ["wget", "curl", "jq"]
 
 [phases.build]
 cmds = [
-  "export PB_LATEST=$(curl -s https://api.github.com/repos/pocketbase/pocketbase/releases/latest | jq -r '.tag_name')",
-  "wget -O pocketbase https://github.com/pocketbase/pocketbase/releases/download/$PB_LATEST/pocketbase_linux_amd64",
-  "chmod +x pocketbase"
+  "export PB_LATEST=$(curl -s https://api.github.com/repos/pocketbase/pocketbase/releases/latest | jq -r '.tag_name') && \
+   wget -O pocketbase https://github.com/pocketbase/pocketbase/releases/download/$PB_LATEST/pocketbase_linux_amd64 && \
+   chmod +x pocketbase"
 ]
 
 [start]
