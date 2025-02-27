@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["wget"]
+
+[phases.build]
+cmds = [
+  "wget -O pocketbase https://github.com/pocketbase/pocketbase/releases/latest/download/pocketbase_linux_amd64",
+  "chmod +x pocketbase"
+]
+
+[start]
+cmd = "./pocketbase serve --http 0.0.0.0:$PORT"
+
