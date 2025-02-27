@@ -1,19 +1,7 @@
-FROM alpine:latest
+FROM ghcr.io/muchobien/pocketbase:latest
 
-# Install necessary packages
-RUN apk add --no-cache wget unzip
+# No VOLUME statement - use Railway volumes instead
+# Mount a volume to /pb_data in Railway dashboard
 
-# Download and set up PocketBase
-RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.25.8/pocketbase_0.25.8_linux_amd64.zip \
-    && unzip pocketbase_0.25.8_linux_amd64.zip \
-    && chmod +x pocketbase \
-    && rm pocketbase_0.25.8_linux_amd64.zip
-
-# Expose the port that PocketBase will run on
-EXPOSE 8080
-
-# Set up a volume for the PocketBase data
-VOLUME /pb_data
-
-# Start PocketBase
-CMD ["./pocketbase", "serve", "--http", "0.0.0.0:8080"]
+# Command will use the Railway PORT environment variable
+CMD ["./pocketbase", "serve", "--http", "0.0.0.0:$PORT"]
